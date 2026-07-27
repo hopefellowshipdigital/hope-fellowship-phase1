@@ -1,23 +1,28 @@
 import type { PrayerAction, ServiceInfoCardData } from "@/types";
+import { siteConfig } from "@/config/site";
+
+const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  siteConfig.address
+)}`;
 
 export const serviceInfoCards: ServiceInfoCardData[] = [
   {
     id: "sunday-worship",
     title: "Sunday Worship",
-    description: "[OFFICIAL SERVICE TIME] — join us in person or online.",
+    description: `${siteConfig.serviceTime} — join us in person or online.`,
     icon: "clock",
     actionLabel: "Plan Your Visit",
     actionHref: "/new-here",
-    isPlaceholder: true,
+    isPlaceholder: false,
   },
   {
     id: "church-location",
     title: "Church Location",
-    description: "[CHURCH ADDRESS]",
+    description: siteConfig.address,
     icon: "map-pin",
     actionLabel: "Get Directions",
-    actionHref: "/new-here",
-    isPlaceholder: true,
+    actionHref: directionsUrl,
+    isPlaceholder: false,
   },
   {
     id: "watch-online",
@@ -34,8 +39,8 @@ export const serviceInfoCards: ServiceInfoCardData[] = [
     description: "Find your way to us from anywhere on the island.",
     icon: "navigation",
     actionLabel: "Open Directions",
-    actionHref: "#",
-    isPlaceholder: true,
+    actionHref: directionsUrl,
+    isPlaceholder: false,
   },
 ];
 

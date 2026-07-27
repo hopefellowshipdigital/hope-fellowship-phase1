@@ -3,20 +3,20 @@
 /* ==========================================================================
    HOPE FELLOWSHIP DESIGN TOKENS
 
-   Temporary brand palette — swap these hex values for Hope Fellowship's
-   official brand colours when supplied. Nothing else needs to change:
-   every component below reads from these variables via Tailwind's
-   `@theme inline` mapping, never a hardcoded colour.
+   Official brand colors, sampled from the Hope Fellowship Church logo
+   (public/brand/logo.png): the blue and gold below. Every component reads
+   from these variables via Tailwind's `@theme inline` mapping, so any
+   future refinement only needs to happen here.
    ========================================================================== */
 
 :root {
   /* Core palette */
-  --color-primary: #0f2a43; /* deep navy — structure, trust */
-  --color-primary-dark: #0a1d30;
+  --color-primary: #04529a; /* official Hope Fellowship blue, from logo */
+  --color-primary-dark: #033764;
   --color-primary-foreground: #ffffff;
 
-  --color-accent: #c89b3c; /* warm gold — hope, warmth */
-  --color-accent-dark: #a97f28;
+  --color-accent: #f6d332; /* official Hope Fellowship gold/sun, from logo */
+  --color-accent-dark: #d9b312;
   --color-accent-foreground: #201804;
 
   --color-background: #fbf7f0; /* soft cream */

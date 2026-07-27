@@ -1,4 +1,5 @@
 import type { FooterLinkGroup, NavigationItem, SocialLink } from "@/types";
+import { siteConfig } from "@/config/site";
 
 export const primaryNavigation: NavigationItem[] = [
   { label: "Home", href: "/" },
@@ -21,10 +22,10 @@ export const mobileQuickActions: NavigationItem[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { label: "YouTube", href: "#", icon: "youtube" },
-  { label: "Facebook", href: "#", icon: "facebook" },
-  { label: "Instagram", href: "#", icon: "instagram" },
-  { label: "WhatsApp", href: "#", icon: "whatsapp" },
+  { label: "YouTube", href: siteConfig.social.youtube, icon: "youtube" },
+  { label: "Facebook", href: siteConfig.social.facebook, icon: "facebook" },
+  { label: "Instagram", href: siteConfig.social.instagram, icon: "instagram" },
+  { label: "WhatsApp", href: siteConfig.social.whatsapp, icon: "whatsapp" },
 ];
 
 export const footerLinkGroups: FooterLinkGroup[] = [

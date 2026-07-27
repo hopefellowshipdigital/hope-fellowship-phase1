@@ -30,7 +30,13 @@ export function ServiceInfoCard({ data }: { data: ServiceInfoCardData }) {
           )}
         </p>
       </div>
-      <TextButton href={data.actionHref} className="mt-auto">
+      <TextButton
+        href={data.actionHref}
+        className="mt-auto"
+        {...(data.actionHref.startsWith("http")
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
         {data.actionLabel}
         <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </TextButton>

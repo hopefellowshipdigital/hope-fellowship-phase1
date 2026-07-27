@@ -1,11 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { footerLinkGroups, socialLinks } from "@/data/navigation";
 import { siteConfig } from "@/config/site";
 
 // lucide-react no longer ships brand/logo icons, so social links use a
-// simple initial-letter badge. Swap for official brand SVGs once Hope
-// Fellowship's visual identity is supplied.
+// simple initial-letter badge that links out to the real profile URLs.
 const socialInitialMap: Record<string, string> = {
   youtube: "Y",
   facebook: "F",
@@ -13,21 +13,22 @@ const socialInitialMap: Record<string, string> = {
   whatsapp: "W",
 };
 
-function PlaceholderText({ children }: { children: string }) {
-  return <span title="Placeholder — replace with confirmed information">{children}</span>;
-}
-
 export function SiteFooter() {
   return (
     <footer className="bg-primary-dark text-primary-foreground">
       <div className="section-container grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
-          <p className="font-display text-2xl font-extrabold">{siteConfig.name}</p>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-            {siteConfig.location}
-          </p>
+          <span className="inline-flex items-center rounded-lg bg-white px-3 py-2 shadow-sm">
+            <Image
+              src="/brand/logo.png"
+              alt={`${siteConfig.name} Church`}
+              width={1095}
+              height={715}
+              className="h-14 w-auto"
+            />
+          </span>
           <p className="mt-4 max-w-xs text-sm text-primary-foreground/70">
-            <PlaceholderText>{siteConfig.missionStatement}</PlaceholderText>
+            {siteConfig.missionStatement}
           </p>
 
           <ul className="mt-6 flex gap-3">
@@ -35,6 +36,8 @@ export function SiteFooter() {
               <li key={link.label}>
                 <a
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={link.label}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-bold transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
@@ -70,15 +73,26 @@ export function SiteFooter() {
           <ul className="mt-4 flex flex-col gap-3 text-sm text-primary-foreground/75">
             <li className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-              <PlaceholderText>{siteConfig.address}</PlaceholderText>
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.address)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary-foreground"
+              >
+                {siteConfig.address}
+              </a>
             </li>
             <li className="flex items-start gap-2.5">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-              <PlaceholderText>{siteConfig.phone}</PlaceholderText>
+              <a href={`tel:+1${siteConfig.phone.replace(/\D/g, "")}`} className="hover:text-primary-foreground">
+                {siteConfig.phone}
+              </a>
             </li>
             <li className="flex items-start gap-2.5">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-              <PlaceholderText>{siteConfig.email}</PlaceholderText>
+              <a href={`mailto:${siteConfig.email}`} className="hover:text-primary-foreground">
+                {siteConfig.email}
+              </a>
             </li>
           </ul>
         </div>
@@ -87,7 +101,7 @@ export function SiteFooter() {
       <div className="border-t border-white/10 pb-20 lg:pb-0">
         <div className="section-container flex flex-col items-center gap-2 py-5 text-center text-xs text-primary-foreground/60 sm:flex-row sm:justify-between sm:text-left">
           <p>
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.name} Church. All rights reserved.
           </p>
           <p>Website in development — Phase 1</p>
         </div>
