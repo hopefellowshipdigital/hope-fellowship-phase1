@@ -1,13 +1,22 @@
+import Image from "next/image";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/buttons";
 import { PageContainer } from "@/components/ui/layout-primitives";
-import { PlaceholderImage } from "@/components/ui/placeholder-image";
 
 export function NewVisitorSection() {
   return (
     <section className="py-16 sm:py-20" aria-labelledby="new-visitor-heading">
       <PageContainer>
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <PlaceholderImage label="Photo of Hope Fellowship congregation" aspect="square" />
+          <div className="overflow-hidden rounded-[var(--radius-lg)] shadow-sm">
+            <Image
+              src="/images/congregation.jpg"
+              alt="The Hope Fellowship Church sanctuary set up for service"
+              width={1600}
+              height={1200}
+              className="h-full w-full object-cover"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
+          </div>
 
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.14em] text-accent-dark">
