@@ -16,9 +16,14 @@ export const SITE_MODE: SiteMode = "normal";
  * Real Hope Fellowship information lives here — this is the one file to
  * edit when any of these details change; every page reads from it rather
  * than hardcoding it.
+ *
+ * Internal note for church administrators (not shown publicly): please
+ * confirm every detail below is fully accurate before final production
+ * launch — service times, address, and contact details in particular.
  */
 export const siteConfig = {
-  name: "Hope Fellowship",
+  name: "Hope Fellowship Church",
+  shortName: "Hope Fellowship",
   location: "Jamaica",
   title: "Hope Fellowship Church Jamaica",
   description:
@@ -27,6 +32,13 @@ export const siteConfig = {
 
   pastorName: "Rev. Christopher Brodber",
   serviceTime: "Sundays at 9:00 AM",
+  serviceSchedule: [
+    {
+      day: "Sunday",
+      label: "Sunday Worship",
+      time: "9:00 AM",
+    },
+  ],
   address: "23 Molynes Road, Kingston 10, Jamaica",
   phone: "876-505-6063",
   whatsapp: "876-505-6063",

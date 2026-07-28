@@ -13,6 +13,9 @@ const publicRoutes = [
   "/prayer",
   "/give",
   "/contact",
+  "/privacy",
+  "/terms",
+  "/safeguarding",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

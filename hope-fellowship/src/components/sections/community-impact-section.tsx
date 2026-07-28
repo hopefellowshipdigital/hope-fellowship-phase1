@@ -15,7 +15,7 @@ export function CommunityImpactSection() {
         <SectionHeading
           eyebrow="Community Impact"
           title="Faith in Action, Beyond Our Walls"
-          description="This section will showcase real outreach and community stories once they're supplied — shown here as a provisional layout."
+          description="Hope Fellowship is committed to spiritual, social and economic transformation in our community and beyond."
           align="center"
           className="mx-auto"
         />
@@ -24,7 +24,7 @@ export function CommunityImpactSection() {
           {impactAreas.map((area) => (
             <div
               key={area.id}
-              className="flex flex-col items-center gap-3 rounded-[var(--radius-lg)] border border-dashed border-border bg-muted/50 px-5 py-8 text-center"
+              className="flex flex-col items-center gap-3 rounded-[var(--radius-lg)] border border-border bg-muted/50 px-5 py-8 text-center"
             >
               <area.icon className="h-8 w-8 text-primary" aria-hidden="true" />
               <p className="text-sm font-semibold text-text">{area.title}</p>

@@ -3,15 +3,7 @@ import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { footerLinkGroups, socialLinks } from "@/data/navigation";
 import { siteConfig } from "@/config/site";
-
-// lucide-react no longer ships brand/logo icons, so social links use a
-// simple initial-letter badge that links out to the real profile URLs.
-const socialInitialMap: Record<string, string> = {
-  youtube: "Y",
-  facebook: "F",
-  instagram: "I",
-  whatsapp: "W",
-};
+import { socialIconMap } from "@/components/ui/social-icons";
 
 export function SiteFooter() {
   return (
@@ -21,7 +13,7 @@ export function SiteFooter() {
           <span className="inline-flex items-center rounded-lg bg-white px-3 py-2 shadow-sm">
             <Image
               src="/brand/logo.png"
-              alt={`${siteConfig.name} Church`}
+              alt={siteConfig.name}
               width={1095}
               height={715}
               className="h-14 w-auto"
@@ -32,19 +24,22 @@ export function SiteFooter() {
           </p>
 
           <ul className="mt-6 flex gap-3">
-            {socialLinks.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-sm font-bold transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2"
-                >
-                  <span aria-hidden="true">{socialInitialMap[link.icon]}</span>
-                </a>
-              </li>
-            ))}
+            {socialLinks.map((link) => {
+              const Icon = socialIconMap[link.icon];
+              return (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-2"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -101,9 +96,9 @@ export function SiteFooter() {
       <div className="border-t border-white/10 pb-20 lg:pb-0">
         <div className="section-container flex flex-col items-center gap-2 py-5 text-center text-xs text-primary-foreground/60 sm:flex-row sm:justify-between sm:text-left">
           <p>
-            © {new Date().getFullYear()} {siteConfig.name} Church. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
-          <p>Website in development — Phase 1</p>
+          <p>{siteConfig.serviceSchedule[0].label} · {siteConfig.serviceSchedule[0].time}</p>
         </div>
       </div>
     </footer>

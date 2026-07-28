@@ -15,7 +15,7 @@ export function SiteHeader() {
           <span className="flex items-center rounded-lg bg-white px-2.5 py-1.5 shadow-sm sm:px-3 sm:py-2">
             <Image
               src="/brand/logo.png"
-              alt={`${siteConfig.name} Church`}
+              alt={siteConfig.name}
               width={1095}
               height={715}
               priority

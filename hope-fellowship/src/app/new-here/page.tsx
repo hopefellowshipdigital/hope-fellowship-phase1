@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Car, Clock, Shirt, Users } from "lucide-react";
 import { PageContainer } from "@/components/ui/layout-primitives";
 import { ContentCard } from "@/components/ui/cards";
-import { PhaseNotice, SimplePageHero } from "@/components/sections/simple-page-hero";
+import { PrimaryButton } from "@/components/ui/buttons";
+import { SimplePageHero } from "@/components/sections/simple-page-hero";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -12,9 +13,13 @@ export const metadata: Metadata = {
 
 const visitDetails = [
   { icon: Clock, title: "Service Time", value: siteConfig.serviceTime },
-  { icon: Car, title: "Parking", value: "[PARKING INFORMATION]" },
+  { icon: Car, title: "Parking", value: "Parking details will be shared here soon." },
   { icon: Shirt, title: "What to Wear", value: "Come as you are — there's no dress code." },
-  { icon: Users, title: "Children's Ministry", value: "[CHILDREN'S MINISTRY INFORMATION]" },
+  {
+    icon: Users,
+    title: "Children's Ministry",
+    value: "Children's ministry details will be shared here soon.",
+  },
 ];
 
 export default function NewHerePage() {
@@ -23,7 +28,7 @@ export default function NewHerePage() {
       <SimplePageHero
         eyebrow="New Here"
         title="Plan Your Visit"
-        description="We know visiting somewhere new can feel like a big step. Here's everything you need to know before you come — and you're always welcome to attend without filling out a form."
+        description="We know visiting somewhere new can feel like a big step. Here's everything you need to know before you come — and you're always welcome to attend without any advance notice."
       />
 
       <PageContainer as="section" className="py-14 sm:py-16">
@@ -41,12 +46,16 @@ export default function NewHerePage() {
           ))}
         </div>
 
-        <div className="mt-8">
-          <PhaseNotice>
-            The optional Plan Your Visit form will be added once public forms are built (Phase 6).
-            Until then, you can reach us from the Contact page — and you&apos;re always welcome to
-            simply show up.
-          </PhaseNotice>
+        <div className="mt-8 flex flex-col items-start gap-4 rounded-[var(--radius-lg)] border border-border bg-muted/50 p-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-muted-text">
+            Have a question before you visit? We&apos;d love to hear from you.
+          </p>
+          <PrimaryButton
+            href="/contact"
+            className="shrink-0 bg-primary text-primary-foreground hover:bg-primary-dark"
+          >
+            Contact Us
+          </PrimaryButton>
         </div>
       </PageContainer>
     </>

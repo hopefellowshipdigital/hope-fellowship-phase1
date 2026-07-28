@@ -6,7 +6,7 @@ export function ServiceInfoSection() {
   return (
     <section className="py-14 sm:py-16" aria-label="Service information">
       <PageContainer>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-3">
           {serviceInfoCards.map((card) => (
             <ServiceInfoCard key={card.id} data={card} />
           ))}

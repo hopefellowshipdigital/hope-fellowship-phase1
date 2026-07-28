@@ -7,6 +7,14 @@
  *  by live YouTube detection; in Phase 1 it is set manually in config. */
 export type SiteMode = "normal" | "live";
 
+/**
+ * Manually-configured Watch Online display state (Phase 2). Will be
+ * replaced by real YouTube API-driven detection in a later phase — the
+ * shape here is designed so that swap doesn't require touching the
+ * components that read it.
+ */
+export type BroadcastDisplayState = "offline" | "upcoming" | "live" | "replay";
+
 export interface NavigationItem {
   label: string;
   href: string;

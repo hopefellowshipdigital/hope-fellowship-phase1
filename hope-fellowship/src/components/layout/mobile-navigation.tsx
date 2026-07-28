@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Clock, Mail, Menu, Phone, X } from "lucide-react";
 import { primaryNavigation } from "@/data/navigation";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 export function MobileNavigation() {
@@ -11,6 +13,8 @@ export function MobileNavigation() {
   const panelRef = useRef<HTMLDivElement>(null);
   const openButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
+  const schedule = siteConfig.serviceSchedule[0];
 
   // Lock background scroll and manage focus while the panel is open.
   useEffect(() => {
@@ -103,26 +107,67 @@ export function MobileNavigation() {
           </button>
         </div>
 
-        <nav aria-label="Mobile primary" className="flex-1 overflow-y-auto px-3 py-4">
-          <ul className="flex flex-col gap-1">
-            {primaryNavigation.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "block rounded-xl px-4 py-3.5 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2",
-                    item.emphasized
-                      ? "bg-accent text-accent-foreground"
-                      : "hover:bg-white/10"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex items-center gap-1.5 border-b border-white/10 px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-accent">
+          <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+          {schedule.label} · {schedule.time}
+        </div>
+
+        <div className="flex-1 overflow-y-auto">
+          <div className="px-3 pt-4">
+            <Link
+              href="/new-here"
+              onClick={() => setOpen(false)}
+              className="block rounded-xl bg-accent px-4 py-3.5 text-center text-base font-bold text-accent-foreground transition-colors hover:bg-accent-dark focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              Plan Your Visit
+            </Link>
+          </div>
+
+          <nav aria-label="Mobile primary" className="px-3 py-4">
+            <ul className="flex flex-col gap-1">
+              {primaryNavigation.map((item) => {
+                const isActive =
+                  item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "block rounded-xl px-4 py-3.5 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2",
+                        item.emphasized
+                          ? "bg-white/15 text-accent"
+                          : isActive
+                            ? "bg-white/10"
+                            : "hover:bg-white/10"
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          <div className="mt-2 flex flex-col gap-2.5 border-t border-white/10 px-5 py-5 text-sm text-primary-foreground/70">
+            <a
+              href={`tel:+1${siteConfig.phone.replace(/\D/g, "")}`}
+              className="flex items-center gap-2.5 hover:text-primary-foreground"
+            >
+              <Phone className="h-4 w-4 text-accent" aria-hidden="true" />
+              {siteConfig.phone}
+            </a>
+            <a
+              href={`mailto:${siteConfig.email}`}
+              className="flex items-center gap-2.5 hover:text-primary-foreground"
+            >
+              <Mail className="h-4 w-4 text-accent" aria-hidden="true" />
+              {siteConfig.email}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

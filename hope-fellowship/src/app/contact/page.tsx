@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { PageContainer } from "@/components/ui/layout-primitives";
 import { ContentCard } from "@/components/ui/cards";
-import { PhaseNotice, SimplePageHero } from "@/components/sections/simple-page-hero";
+import { SimplePageHero } from "@/components/sections/simple-page-hero";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -11,9 +11,27 @@ export const metadata: Metadata = {
 };
 
 const contactDetails = [
-  { icon: MapPin, label: "Address", value: siteConfig.address },
-  { icon: Phone, label: "Phone", value: siteConfig.phone },
-  { icon: Mail, label: "Email", value: siteConfig.email },
+  {
+    icon: MapPin,
+    label: "Address",
+    value: siteConfig.address,
+    href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.address)}`,
+    external: true,
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: siteConfig.phone,
+    href: `tel:+1${siteConfig.phone.replace(/\D/g, "")}`,
+    external: false,
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: siteConfig.email,
+    href: `mailto:${siteConfig.email}`,
+    external: false,
+  },
 ];
 
 export default function ContactPage() {
@@ -31,16 +49,15 @@ export default function ContactPage() {
             <ContentCard key={detail.label} className="flex flex-col items-center gap-3 text-center">
               <detail.icon className="h-6 w-6 text-primary" aria-hidden="true" />
               <h2 className="text-sm font-bold text-text">{detail.label}</h2>
-              <p className="text-sm text-muted-text">{detail.value}</p>
+              <a
+                href={detail.href}
+                {...(detail.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="text-sm text-muted-text hover:text-primary hover:underline"
+              >
+                {detail.value}
+              </a>
             </ContentCard>
           ))}
-        </div>
-
-        <div className="mt-6">
-          <PhaseNotice>
-            A validated contact form will be added in Phase 6. Until then, please use the
-            placeholder details above once they&apos;re confirmed and replaced with real information.
-          </PhaseNotice>
         </div>
       </PageContainer>
     </>

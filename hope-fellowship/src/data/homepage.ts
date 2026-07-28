@@ -33,15 +33,6 @@ export const serviceInfoCards: ServiceInfoCardData[] = [
     actionHref: "/watch",
     isPlaceholder: false,
   },
-  {
-    id: "get-directions",
-    title: "Get Directions",
-    description: "Find your way to us from anywhere on the island.",
-    icon: "navigation",
-    actionLabel: "Open Directions",
-    actionHref: directionsUrl,
-    isPlaceholder: false,
-  },
 ];
 
 export const prayerActions: PrayerAction[] = [
@@ -56,14 +47,14 @@ export const prayerActions: PrayerAction[] = [
     id: "pastoral-support",
     title: "Request Pastoral Support",
     description: "Speak with a member of our pastoral team.",
-    href: "/prayer",
+    href: "/contact",
     icon: "life-buoy",
   },
   {
     id: "share-testimony",
     title: "Share a Testimony",
     description: "Tell us how God has been at work in your life.",
-    href: "/prayer",
+    href: "/connect",
     icon: "message-circle-heart",
   },
 ];

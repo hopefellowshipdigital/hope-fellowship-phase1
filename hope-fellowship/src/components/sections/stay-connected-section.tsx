@@ -1,5 +1,8 @@
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail } from "lucide-react";
+import { TextButton } from "@/components/ui/buttons";
 import { PageContainer, SectionHeading } from "@/components/ui/layout-primitives";
+import { socialIconMap } from "@/components/ui/social-icons";
+import { socialLinks } from "@/data/navigation";
 
 export function StayConnectedSection() {
   return (
@@ -12,22 +15,36 @@ export function StayConnectedSection() {
           className="mx-auto"
         />
 
-        <div className="mx-auto mt-8 grid max-w-2xl gap-5 sm:grid-cols-2">
-          <div className="flex flex-col items-center gap-3 rounded-[var(--radius-lg)] border border-border bg-surface px-6 py-8 text-center shadow-sm">
-            <Mail className="h-7 w-7 text-primary" aria-hidden="true" />
-            <h3 className="text-base font-bold text-text">Email Newsletter</h3>
-            <p className="text-sm text-muted-text">
-              Sign-up will be activated once our email service is connected.
-            </p>
+        <div className="mx-auto mt-8 flex max-w-xl flex-col items-center gap-6 rounded-[var(--radius-lg)] border border-border bg-surface px-6 py-10 text-center shadow-sm">
+          <p className="text-sm text-muted-text">
+            Follow Hope Fellowship on social media for updates, messages and community news.
+          </p>
+
+          <ul className="flex gap-3">
+            {socialLinks.map((link) => {
+              const Icon = socialIconMap[link.icon];
+              return (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/5 text-primary transition-colors hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="flex items-center gap-2 text-sm text-muted-text">
+            <Mail className="h-4 w-4 text-primary" aria-hidden="true" />
+            <span>Email updates are coming soon.</span>
           </div>
-          <div className="flex flex-col items-center gap-3 rounded-[var(--radius-lg)] border border-border bg-surface px-6 py-8 text-center shadow-sm">
-            <MessageCircle className="h-7 w-7 text-primary" aria-hidden="true" />
-            <h3 className="text-base font-bold text-text">WhatsApp Updates</h3>
-            <p className="text-sm text-muted-text">
-              A WhatsApp community link will appear here: {" "}
-              <span className="font-semibold">[WHATSAPP LINK]</span>
-            </p>
-          </div>
+
+          <TextButton href="/connect">Connect With Us</TextButton>
         </div>
       </PageContainer>
     </section>

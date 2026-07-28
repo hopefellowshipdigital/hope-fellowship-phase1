@@ -14,8 +14,8 @@ export function GivingSection() {
             Give Cheerfully, Sow Faithfully
           </h2>
           <p className="max-w-lg text-primary-foreground/75">
-            Your generosity helps Hope Fellowship reach our community and beyond. Giving details
-            and secure online giving will be added once confirmed by the church office.
+            Your generosity helps Hope Fellowship reach our community and beyond — supporting
+            worship, ministry, outreach and stewardship. Online giving is coming soon.
           </p>
           <PrimaryButton href="/give">Giving Information</PrimaryButton>
         </div>

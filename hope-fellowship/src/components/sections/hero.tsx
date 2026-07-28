@@ -1,17 +1,19 @@
+import { Clock, MapPin } from "lucide-react";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/buttons";
 import { DaybreakArc } from "@/components/ui/daybreak-arc";
 import { LiveStatusBadge } from "@/components/ui/live-status-badge";
-import { PlaceholderImage } from "@/components/ui/placeholder-image";
+import { siteConfig } from "@/config/site";
 import type { SiteMode } from "@/types";
 
 export function Hero({ mode }: { mode: SiteMode }) {
   const isLive = mode === "live";
+  const schedule = siteConfig.serviceSchedule[0];
 
   return (
     <section className="relative overflow-hidden bg-primary text-primary-foreground">
       <DaybreakArc className="absolute inset-0 h-full w-full" />
 
-      <div className="section-container relative flex flex-col items-center gap-10 py-16 text-center sm:py-20 lg:py-28">
+      <div className="section-container relative flex flex-col items-center gap-8 py-16 text-center sm:py-20 lg:py-28">
         {isLive ? (
           <LiveStatusBadge status="live" />
         ) : (
@@ -44,16 +46,19 @@ export function Hero({ mode }: { mode: SiteMode }) {
           )}
         </div>
 
-        {/* Static fallback visual — keeps the hero meaningful before an
-            official photo or video is supplied, and avoids autoplaying
-            media on mobile connections. */}
-        <div className="mt-4 w-full max-w-3xl sm:hidden">
-          <PlaceholderImage
-            label="Hope Fellowship service photo will appear here"
-            aspect="video"
-            className="border-white/20 bg-white/5 text-primary-foreground/70"
-          />
+        <div className="flex flex-col items-center gap-2 text-sm text-primary-foreground/75 sm:flex-row sm:gap-6">
+          <span className="inline-flex items-center gap-1.5">
+            <Clock className="h-4 w-4 text-accent" aria-hidden="true" />
+            {schedule.label} · {schedule.time}
+          </span>
+          <span className="hidden text-primary-foreground/30 sm:inline">•</span>
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin className="h-4 w-4 text-accent" aria-hidden="true" />
+            23 Molynes Road, Kingston
+          </span>
         </div>
+
+        <p className="text-sm font-semibold text-primary-foreground/60">You are welcome here.</p>
       </div>
     </section>
   );

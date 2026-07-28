@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { UpcomingEventsSection } from "@/components/sections/upcoming-events-section";
-import { PageContainer } from "@/components/ui/layout-primitives";
-import { PhaseNotice, SimplePageHero } from "@/components/sections/simple-page-hero";
+import { SimplePageHero } from "@/components/sections/simple-page-hero";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -14,17 +13,10 @@ export default function EventsPage() {
       <SimplePageHero
         eyebrow="Events"
         title="What's Happening"
-        description="The cards below are sample content showing how events will be presented. Real Hope Fellowship events will replace them once the events feature is connected to the database."
+        description="Upcoming services, programmes and community events at Hope Fellowship — announced here as they're scheduled."
       />
 
       <UpcomingEventsSection />
-
-      <PageContainer as="section" className="pb-14 sm:pb-16">
-        <PhaseNotice>
-          Registration, calendar exports and WhatsApp sharing are planned for the Events phase
-          (Phase 10).
-        </PhaseNotice>
-      </PageContainer>
     </>
   );
 }

@@ -22,8 +22,8 @@ export default function AdminPlaceholderPage() {
           <h1 className="text-2xl font-bold text-text">Admin Dashboard</h1>
           <p className="text-sm text-muted-text">
             This is a development placeholder only. There is no login, authentication or admin
-            functionality here yet — secure Supabase authentication and role-based access will be
-            implemented in the Secure Administration Dashboard phase (Phase 8).
+            functionality here yet — secure authentication and role-based access are planned for a
+            later stage of development.
           </p>
           <p className="rounded-full bg-muted px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-muted-text">
             Not yet secured — do not use for real data

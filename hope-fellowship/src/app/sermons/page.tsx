@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { SecondaryButton } from "@/components/ui/buttons";
 import { PageContainer } from "@/components/ui/layout-primitives";
 import { EmptyState } from "@/components/ui/states";
-import { PhaseNotice, SimplePageHero } from "@/components/sections/simple-page-hero";
+import { SimplePageHero } from "@/components/sections/simple-page-hero";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Sermons",
@@ -14,20 +16,24 @@ export default function SermonsPage() {
       <SimplePageHero
         eyebrow="Sermon Library"
         title="Watch & Revisit the Word"
-        description="Search, filter and catch up on past messages. This library will connect to the church's YouTube channel in a later phase."
+        description="Catch up on past messages from Hope Fellowship. Our full sermon library is on its way — in the meantime, find our messages on YouTube."
       />
 
       <PageContainer as="section" className="py-14 sm:py-16">
         <EmptyState
-          title="No sermons yet"
-          description="The sermon library will populate automatically once YouTube integration is complete."
+          title="Our sermon library is being prepared"
+          description="Messages will appear here soon. For now, visit our YouTube channel to watch recent services."
+          action={
+            <SecondaryButton
+              href={siteConfig.social.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-primary/20 text-primary hover:border-primary/50"
+            >
+              Visit Our YouTube Channel
+            </SecondaryButton>
+          }
         />
-        <div className="mt-6">
-          <PhaseNotice>
-            Search, filtering by speaker/series/scripture, and transcripts are planned for the
-            Sermon Library phase (Phase 5).
-          </PhaseNotice>
-        </div>
       </PageContainer>
     </>
   );

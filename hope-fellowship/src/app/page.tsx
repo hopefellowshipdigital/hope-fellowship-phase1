@@ -10,6 +10,7 @@ import { PrayerSection } from "@/components/sections/prayer-section";
 import { CommunityImpactSection } from "@/components/sections/community-impact-section";
 import { GivingSection } from "@/components/sections/giving-section";
 import { StayConnectedSection } from "@/components/sections/stay-connected-section";
+import { Reveal } from "@/components/ui/reveal";
 import { SITE_MODE } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -21,15 +22,31 @@ export default function HomePage() {
     <>
       <Hero mode={SITE_MODE} />
       <ServiceInfoSection />
-      <NewVisitorSection />
+      <Reveal>
+        <NewVisitorSection />
+      </Reveal>
       <WatchPreviewSection />
-      <LatestMessageSection />
-      <UpcomingEventsSection />
-      <MinistriesSection />
-      <PrayerSection />
-      <CommunityImpactSection />
-      <GivingSection />
-      <StayConnectedSection />
+      <Reveal>
+        <LatestMessageSection />
+      </Reveal>
+      <Reveal>
+        <UpcomingEventsSection />
+      </Reveal>
+      <Reveal>
+        <MinistriesSection />
+      </Reveal>
+      <Reveal>
+        <PrayerSection />
+      </Reveal>
+      <Reveal>
+        <CommunityImpactSection />
+      </Reveal>
+      <Reveal>
+        <GivingSection />
+      </Reveal>
+      <Reveal>
+        <StayConnectedSection />
+      </Reveal>
     </>
   );
 }

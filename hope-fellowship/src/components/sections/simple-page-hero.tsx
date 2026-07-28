@@ -9,10 +9,9 @@ interface SimplePageHeroProps {
 }
 
 /**
- * SimplePageHero — consistent heading pattern for the placeholder routes
- * built in Phase 1. Each page still gets a proper <h1>, description, and
- * spacing so the route is genuinely usable while its full feature set is
- * built out in a later phase.
+ * SimplePageHero — consistent heading pattern used across secondary pages.
+ * Every page still gets a proper <h1>, description, and spacing so the
+ * route feels complete even while its full feature set is still growing.
  */
 export function SimplePageHero({ eyebrow, title, description, children }: SimplePageHeroProps) {
   return (
@@ -26,14 +25,5 @@ export function SimplePageHero({ eyebrow, title, description, children }: Simple
         {children}
       </PageContainer>
     </section>
-  );
-}
-
-/** PhaseNotice — labels a section of a page as awaiting a later build phase. */
-export function PhaseNotice({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-[var(--radius-md)] border border-dashed border-border bg-muted/60 px-5 py-4 text-sm text-muted-text">
-      {children}
-    </div>
   );
 }
