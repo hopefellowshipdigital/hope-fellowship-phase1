@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/sections/hero";
-import { ServiceInfoSection } from "@/components/sections/service-info-section";
-import { NewVisitorSection } from "@/components/sections/new-visitor-section";
-import { WatchPreviewSection } from "@/components/sections/watch-preview-section";
-import { LatestMessageSection } from "@/components/sections/latest-message-section";
-import { UpcomingEventsSection } from "@/components/sections/upcoming-events-section";
-import { MinistriesSection } from "@/components/sections/ministries-section";
-import { PrayerSection } from "@/components/sections/prayer-section";
-import { CommunityImpactSection } from "@/components/sections/community-impact-section";
-import { GivingSection } from "@/components/sections/giving-section";
-import { StayConnectedSection } from "@/components/sections/stay-connected-section";
+import { CinematicHero } from "@/components/home/cinematic-hero";
+import { SundayInfoPanel } from "@/components/home/sunday-info-panel";
+import { WelcomeStory } from "@/components/home/welcome-story";
+import { WatchExperience } from "@/components/home/watch-experience";
+import { NextStepMosaic } from "@/components/home/next-step-mosaic";
+import { FeaturedMessage } from "@/components/home/featured-message";
+import { TransformationStory } from "@/components/home/transformation-story";
+import { ChurchLifeSection } from "@/components/home/church-life-section";
+import { FinalInvitation } from "@/components/home/final-invitation";
 import { Reveal } from "@/components/ui/reveal";
 import { SITE_MODE } from "@/config/site";
 
@@ -20,33 +18,23 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Hero mode={SITE_MODE} />
-      <ServiceInfoSection />
+      <CinematicHero mode={SITE_MODE} />
+      <SundayInfoPanel />
       <Reveal>
-        <NewVisitorSection />
+        <WelcomeStory />
       </Reveal>
-      <WatchPreviewSection />
+      <WatchExperience />
       <Reveal>
-        <LatestMessageSection />
-      </Reveal>
-      <Reveal>
-        <UpcomingEventsSection />
+        <NextStepMosaic />
       </Reveal>
       <Reveal>
-        <MinistriesSection />
+        <FeaturedMessage />
       </Reveal>
       <Reveal>
-        <PrayerSection />
+        <TransformationStory />
       </Reveal>
-      <Reveal>
-        <CommunityImpactSection />
-      </Reveal>
-      <Reveal>
-        <GivingSection />
-      </Reveal>
-      <Reveal>
-        <StayConnectedSection />
-      </Reveal>
+      <ChurchLifeSection />
+      <FinalInvitation />
     </>
   );
 }

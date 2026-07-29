@@ -77,8 +77,3 @@ export interface PrayerAction {
   href: string;
   icon: "hand-heart" | "life-buoy" | "message-circle-heart";
 }
-
-export interface FooterLinkGroup {
-  heading: string;
-  links: { label: string; href: string }[];
-}

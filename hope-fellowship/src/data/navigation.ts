@@ -1,4 +1,4 @@
-import type { FooterLinkGroup, NavigationItem, SocialLink } from "@/types";
+import type { NavigationItem, SocialLink } from "@/types";
 import { siteConfig } from "@/config/site";
 
 export const primaryNavigation: NavigationItem[] = [
@@ -26,34 +26,4 @@ export const socialLinks: SocialLink[] = [
   { label: "Facebook", href: siteConfig.social.facebook, icon: "facebook" },
   { label: "Instagram", href: siteConfig.social.instagram, icon: "instagram" },
   { label: "WhatsApp", href: siteConfig.social.whatsapp, icon: "whatsapp" },
-];
-
-export const footerLinkGroups: FooterLinkGroup[] = [
-  {
-    heading: "Explore",
-    links: [
-      { label: "New Here", href: "/new-here" },
-      { label: "About", href: "/about" },
-      { label: "Ministries", href: "/ministries" },
-      { label: "Events", href: "/events" },
-    ],
-  },
-  {
-    heading: "Connect",
-    links: [
-      { label: "Watch Online", href: "/watch" },
-      { label: "Sermons", href: "/sermons" },
-      { label: "Prayer Requests", href: "/prayer" },
-      { label: "Give", href: "/give" },
-      { label: "Contact Us", href: "/contact" },
-    ],
-  },
-  {
-    heading: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Use", href: "/terms" },
-      { label: "Safeguarding Policy", href: "/safeguarding" },
-    ],
-  },
 ];

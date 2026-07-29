@@ -13,6 +13,7 @@
   /* Core palette */
   --color-primary: #04529a; /* official Hope Fellowship blue, from logo */
   --color-primary-dark: #033764;
+  --color-midnight: #071b30; /* deep immersive navy for dark sections */
   --color-primary-foreground: #ffffff;
 
   --color-accent: #f6d332; /* official Hope Fellowship gold/sun, from logo */
@@ -21,9 +22,12 @@
 
   --color-background: #fbf7f0; /* soft cream */
   --color-surface: #ffffff;
+  --color-ivory: #fffbf3; /* warm white, slightly richer than surface */
   --color-muted: #f1ebdd;
+  --color-sand: #e9decb; /* muted stone/sand for section variety */
 
   --color-text: #1c2430;
+  --color-charcoal: #2a2723;
   --color-muted-text: #5b6472;
   --color-border: #e2e0d8;
 
@@ -47,6 +51,7 @@
 @theme inline {
   --color-primary: var(--color-primary);
   --color-primary-dark: var(--color-primary-dark);
+  --color-midnight: var(--color-midnight);
   --color-primary-foreground: var(--color-primary-foreground);
 
   --color-accent: var(--color-accent);
@@ -55,9 +60,12 @@
 
   --color-background: var(--color-background);
   --color-surface: var(--color-surface);
+  --color-ivory: var(--color-ivory);
   --color-muted: var(--color-muted);
+  --color-sand: var(--color-sand);
 
   --color-text: var(--color-text);
+  --color-charcoal: var(--color-charcoal);
   --color-muted-text: var(--color-muted-text);
   --color-border: var(--color-border);
 
@@ -72,6 +80,7 @@
 
   --font-sans: "Inter";
   --font-display: "Manrope";
+  --font-serif-accent: "Lora";
 }
 
 /* ==========================================================================
@@ -100,6 +109,7 @@ body {
   background: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 h1,
@@ -110,6 +120,13 @@ h5,
 h6 {
   font-family: var(--font-display), var(--font-sans), ui-sans-serif, sans-serif;
   letter-spacing: -0.01em;
+}
+
+/* Refined serif accent — used sparingly for short quotations or scripture
+   statements, never for headings or body copy at large. */
+.font-serif-accent {
+  font-family: var(--font-serif-accent), Georgia, serif;
+  font-style: italic;
 }
 
 /* Visible focus ring everywhere — never suppressed. */
