@@ -1,63 +1,70 @@
 import type { Metadata } from "next";
-import { Car, Clock, Shirt, Users } from "lucide-react";
-import { PageContainer } from "@/components/ui/layout-primitives";
-import { ContentCard } from "@/components/ui/cards";
-import { PrimaryButton } from "@/components/ui/buttons";
-import { SimplePageHero } from "@/components/sections/simple-page-hero";
-import { siteConfig } from "@/config/site";
+import { VisitHero } from "@/components/visit/visit-hero";
+import { VisitorPageNavigation } from "@/components/visit/visitor-page-navigation";
+import { WelcomeIntroduction } from "@/components/visit/welcome-introduction";
+import { VisitInfoPanel } from "@/components/visit/visit-info-panel";
+import { WhatToExpectSection } from "@/components/visit/what-to-expect";
+import { VisitorJourney } from "@/components/visit/visitor-journey";
+import { FamilyInformationPanel } from "@/components/visit/family-information-panel";
+import { WatchOnlineInvitation } from "@/components/visit/watch-online-invitation";
+import { VisitorFaq } from "@/components/visit/visitor-faq";
+import { VisitorAssistanceCard } from "@/components/visit/visitor-assistance-card";
+import { FinalInvitation } from "@/components/home/final-invitation";
+import { Reveal } from "@/components/ui/reveal";
 
 export const metadata: Metadata = {
   title: "New Here",
-  description: "Everything you need to know before your first visit to Hope Fellowship.",
-};
-
-const visitDetails = [
-  { icon: Clock, title: "Service Time", value: siteConfig.serviceTime },
-  { icon: Car, title: "Parking", value: "Parking details will be shared here soon." },
-  { icon: Shirt, title: "What to Wear", value: "Come as you are — there's no dress code." },
-  {
-    icon: Users,
-    title: "Children's Ministry",
-    value: "Children's ministry details will be shared here soon.",
+  description:
+    "Planning your first visit to Hope Fellowship Church in Kingston, Jamaica? Find Sunday worship times, location details, directions and information about what to expect.",
+  alternates: {
+    canonical: "/new-here",
   },
-];
+};
 
 export default function NewHerePage() {
   return (
     <>
-      <SimplePageHero
-        eyebrow="New Here"
-        title="Plan Your Visit"
-        description="We know visiting somewhere new can feel like a big step. Here's everything you need to know before you come — and you're always welcome to attend without any advance notice."
+      <VisitHero
+        eyebrow="New to Hope Fellowship?"
+        heading="There Is a Place for You Here"
+        description="Visiting a church for the first time can feel like a big step. We want to make your experience as welcoming, clear and comfortable as possible."
+        primaryLabel="Plan Your Visit"
+        primaryHref="/plan-your-visit"
+        secondaryLabel="Watch Online"
+        secondaryHref="/watch"
+        showRegistrationNote
       />
-
-      <PageContainer as="section" className="py-14 sm:py-16">
-        <div className="grid gap-5 sm:grid-cols-2">
-          {visitDetails.map((detail) => (
-            <ContentCard key={detail.title} className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/5 text-primary">
-                <detail.icon className="h-5 w-5" aria-hidden="true" />
-              </div>
-              <div>
-                <h2 className="text-base font-bold text-text">{detail.title}</h2>
-                <p className="mt-1 text-sm text-muted-text">{detail.value}</p>
-              </div>
-            </ContentCard>
-          ))}
-        </div>
-
-        <div className="mt-8 flex flex-col items-start gap-4 rounded-[var(--radius-lg)] border border-border bg-muted/50 p-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted-text">
-            Have a question before you visit? We&apos;d love to hear from you.
-          </p>
-          <PrimaryButton
-            href="/contact"
-            className="shrink-0 bg-primary text-primary-foreground hover:bg-primary-dark"
-          >
-            Contact Us
-          </PrimaryButton>
-        </div>
-      </PageContainer>
+      <VisitorPageNavigation />
+      <Reveal>
+        <WelcomeIntroduction />
+      </Reveal>
+      <VisitInfoPanel />
+      <Reveal>
+        <WhatToExpectSection />
+      </Reveal>
+      <Reveal>
+        <VisitorJourney />
+      </Reveal>
+      <Reveal>
+        <FamilyInformationPanel />
+      </Reveal>
+      <Reveal>
+        <WatchOnlineInvitation />
+      </Reveal>
+      <Reveal>
+        <VisitorFaq />
+      </Reveal>
+      <Reveal>
+        <VisitorAssistanceCard />
+      </Reveal>
+      <FinalInvitation
+        heading="Ready to Plan the Details?"
+        description="Find service times, directions and everything else you need for your first visit."
+        primaryLabel="Plan Your Visit"
+        primaryHref="/plan-your-visit"
+        secondaryLabel="Contact Us"
+        secondaryHref="/contact"
+      />
     </>
   );
 }

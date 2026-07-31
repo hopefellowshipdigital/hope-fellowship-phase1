@@ -28,7 +28,7 @@ export function SundayInfoPanel() {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:shrink-0">
-            <PrimaryButton href="/new-here" className="justify-center">
+            <PrimaryButton href="/plan-your-visit" className="justify-center">
               Plan Your Visit
             </PrimaryButton>
             <TextButton

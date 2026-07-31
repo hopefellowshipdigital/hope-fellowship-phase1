@@ -61,7 +61,7 @@ export function CinematicHero({ mode }: { mode: SiteMode }) {
                 </>
               ) : (
                 <>
-                  <PrimaryButton href="/new-here">Plan Your Visit</PrimaryButton>
+                  <PrimaryButton href="/plan-your-visit">Plan Your Visit</PrimaryButton>
                   <SecondaryButton href="/watch" className="border-white/40 text-white hover:border-white/70">
                     Watch Online
                   </SecondaryButton>

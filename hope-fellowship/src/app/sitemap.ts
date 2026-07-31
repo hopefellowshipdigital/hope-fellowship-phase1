@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 const publicRoutes = [
   "",
   "/new-here",
+  "/plan-your-visit",
   "/about",
   "/ministries",
   "/watch",
