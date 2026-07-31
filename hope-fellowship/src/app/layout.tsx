@@ -12,6 +12,7 @@ import { MobileStickyBar } from "@/components/layout/mobile-sticky-bar";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
+import { getBroadcastData } from "@/lib/youtube";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -33,11 +34,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Cheap: this reuses the same cached YouTube data every other page-level
+  // fetch already relies on (see src/lib/youtube) — it does not add a new
+  // uncached request per page view.
+  const broadcast = await getBroadcastData();
+
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col antialiased">
@@ -53,7 +59,7 @@ export default function RootLayout({
         </main>
 
         <SiteFooter />
-        <MobileStickyBar />
+        <MobileStickyBar isLive={broadcast.state === "live"} />
       </body>
     </html>
   );

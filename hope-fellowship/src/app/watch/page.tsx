@@ -1,75 +1,66 @@
 import type { Metadata } from "next";
-import { PlayCircle } from "lucide-react";
-import { PrimaryButton, SecondaryButton } from "@/components/ui/buttons";
-import { LiveStatusBadge } from "@/components/ui/live-status-badge";
 import { PageContainer } from "@/components/ui/layout-primitives";
-import { SimplePageHero } from "@/components/sections/simple-page-hero";
-import { broadcastConfig } from "@/config/broadcast";
-import { siteConfig } from "@/config/site";
+import { WatchHero } from "@/components/watch/watch-hero";
+import { VideoAndChatSection } from "@/components/watch/video-and-chat-section";
+import { ViewerActionBar } from "@/components/watch/viewer-action-bar";
+import { CurrentServiceInfo } from "@/components/watch/current-service-info";
+import { PrayerSection } from "@/components/sections/prayer-section";
+import { LatestVideosSection } from "@/components/watch/latest-videos-section";
+import { NextServiceInfo, SubscribeInvitation } from "@/components/watch/service-schedule-sections";
+import { getWatchPageData } from "@/lib/youtube/watch-data";
 
-export const metadata: Metadata = {
-  title: "Watch Online",
-  description: "Watch Hope Fellowship's livestream and recent messages online.",
-};
+const baseTitle = "Watch Online | Hope Fellowship Church Jamaica";
+const baseDescription =
+  "Watch Hope Fellowship Church services online from Kingston, Jamaica. Join the livestream, request prayer, connect with the church and explore recent messages.";
 
-const stateCopy = {
-  offline: {
-    heading: "Worship With Us Live",
-    description:
-      "Join Hope Fellowship for worship, the Word, and community — wherever you are. Watch our latest message below, or visit our YouTube channel for more.",
-    mediaLabel: "Watch our latest message",
-  },
-  upcoming: {
-    heading: "Join Our Next Service",
-    description: "Our next service is coming up soon. Join us online when it begins.",
-    mediaLabel: "Our next service will begin soon",
-  },
-  live: {
-    heading: "We're Live Right Now",
-    description: "Worship with us right now, wherever you are.",
-    mediaLabel: "We're live right now",
-  },
-  replay: {
-    heading: "Watch the Service Replay",
-    description: "Missed it live? Watch the replay whenever it suits you.",
-    mediaLabel: "Replay available now",
-  },
-} as const;
+// Revalidate the page itself frequently so the Next.js page cache doesn't
+// outlive the underlying YouTube data cache (see src/lib/youtube for the
+// actual quota-aware caching strategy — this is just the page shell).
+export const revalidate = 60;
 
-export default function WatchPage() {
-  const { state } = broadcastConfig;
-  const content = stateCopy[state];
+export async function generateMetadata(): Promise<Metadata> {
+  const { broadcast } = await getWatchPageData();
+
+  // Only build dynamic OG data when we have a real, specific broadcast to
+  // describe — never invent a title/image when the data isn't there.
+  const hasSpecificBroadcast = Boolean(broadcast.title && broadcast.thumbnail);
+
+  return {
+    title: baseTitle,
+    description: baseDescription,
+    openGraph: hasSpecificBroadcast
+      ? {
+          title: `${broadcast.title} | Hope Fellowship Church`,
+          description: baseDescription,
+          images: broadcast.thumbnail ? [{ url: broadcast.thumbnail }] : undefined,
+        }
+      : {
+          title: baseTitle,
+          description: baseDescription,
+        },
+  };
+}
+
+export default async function WatchPage() {
+  const { broadcast, recentVideos } = await getWatchPageData();
+  const isLive = broadcast.state === "live";
 
   return (
     <>
-      <SimplePageHero eyebrow="Watch Online" title={content.heading} description={content.description}>
-        {state === "live" && (
-          <div className="mt-6">
-            <LiveStatusBadge status="live" />
-          </div>
-        )}
-      </SimplePageHero>
+      <WatchHero broadcast={broadcast} />
 
-      <PageContainer as="section" className="py-14 sm:py-16">
-        <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-[var(--radius-lg)] border border-border bg-muted text-muted-text">
-          <PlayCircle className="h-12 w-12" aria-hidden="true" />
-          <span className="text-sm font-medium">{content.mediaLabel}</span>
-        </div>
+      <div className="bg-midnight pb-4">
+        <VideoAndChatSection broadcast={broadcast} />
+        <PageContainer className="pb-14 sm:pb-16">
+          <ViewerActionBar isLive={isLive} />
+        </PageContainer>
+      </div>
 
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <PrimaryButton href="/sermons" className="bg-primary text-primary-foreground hover:bg-primary-dark">
-            Browse Sermons
-          </PrimaryButton>
-          <SecondaryButton
-            href={siteConfig.social.youtube}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-primary/20 text-primary hover:border-primary/50"
-          >
-            Visit Our YouTube Channel
-          </SecondaryButton>
-        </div>
-      </PageContainer>
+      <CurrentServiceInfo broadcast={broadcast} />
+      <PrayerSection />
+      <LatestVideosSection videos={recentVideos} />
+      <NextServiceInfo />
+      <SubscribeInvitation />
     </>
   );
 }

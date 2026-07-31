@@ -4,10 +4,10 @@ import { LiveStatusBadge } from "@/components/ui/live-status-badge";
 import { PhotoSlot } from "@/components/ui/photo-slot";
 import { homepageImages } from "@/data/homepage-images";
 import { siteConfig } from "@/config/site";
-import type { SiteMode } from "@/types";
+import type { NormalizedBroadcast } from "@/lib/youtube/types";
 
-export function CinematicHero({ mode }: { mode: SiteMode }) {
-  const isLive = mode === "live";
+export function CinematicHero({ broadcast }: { broadcast: NormalizedBroadcast }) {
+  const isLive = broadcast.state === "live";
   const schedule = siteConfig.serviceSchedule[0];
   const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.address)}`;
 

@@ -2,7 +2,7 @@ import { PlayCircle } from "lucide-react";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/buttons";
 import { PageContainer } from "@/components/ui/layout-primitives";
 import { LiveStatusBadge } from "@/components/ui/live-status-badge";
-import { broadcastConfig } from "@/config/broadcast";
+import { getBroadcastData } from "@/lib/youtube";
 import { siteConfig } from "@/config/site";
 
 const stateCopy = {
@@ -12,8 +12,8 @@ const stateCopy = {
   replay: "Missed the live service? Watch the replay whenever it suits you.",
 } as const;
 
-export function WatchOnlineInvitation() {
-  const { state } = broadcastConfig;
+export async function WatchOnlineInvitation() {
+  const { state } = await getBroadcastData();
 
   return (
     <section className="py-16 sm:py-20" aria-labelledby="watch-invitation-heading">

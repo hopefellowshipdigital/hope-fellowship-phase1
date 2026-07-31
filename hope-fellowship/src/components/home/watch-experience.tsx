@@ -3,8 +3,8 @@ import { PrimaryButton, SecondaryButton, TextButton } from "@/components/ui/butt
 import { PageContainer } from "@/components/ui/layout-primitives";
 import { LiveStatusBadge } from "@/components/ui/live-status-badge";
 import { ShareButton } from "@/components/ui/share-button";
-import { broadcastConfig } from "@/config/broadcast";
 import { siteConfig } from "@/config/site";
+import type { NormalizedBroadcast } from "@/lib/youtube/types";
 
 const stateContent = {
   offline: {
@@ -29,9 +29,14 @@ const stateContent = {
   },
 } as const;
 
-export function WatchExperience() {
-  const { state } = broadcastConfig;
+interface WatchExperienceProps {
+  broadcast: NormalizedBroadcast;
+}
+
+export function WatchExperience({ broadcast }: WatchExperienceProps) {
+  const { state, title, thumbnail } = broadcast;
   const content = stateContent[state];
+  const mediaLabel = title && (state === "live" || state === "replay") ? title : content.mediaLabel;
 
   return (
     <section className="relative overflow-hidden bg-midnight py-20 text-white sm:py-28" aria-labelledby="watch-heading">
@@ -83,12 +88,18 @@ export function WatchExperience() {
           </div>
 
           <div className="rounded-[var(--radius-lg)] border border-white/10 bg-white/[0.04] p-4 sm:p-5">
-            <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-white/10 bg-black/30 text-white/60">
-              <PlayCircle className="h-12 w-12" aria-hidden="true" />
-              <span className="text-sm font-medium">{content.mediaLabel}</span>
+            <div className="relative flex aspect-video w-full flex-col items-center justify-center gap-3 overflow-hidden rounded-[var(--radius-md)] border border-white/10 bg-black/30 text-white/60">
+              {thumbnail ? (
+                // eslint-disable-next-line @next/next/no-img-element -- external YouTube CDN thumbnail
+                <img src={thumbnail} alt="" className="absolute inset-0 h-full w-full object-cover opacity-60" />
+              ) : null}
+              <PlayCircle className="relative h-12 w-12" aria-hidden="true" />
+              <span className="relative text-sm font-medium">{mediaLabel}</span>
             </div>
             <div className="mt-4 flex items-center justify-between gap-3">
-              <p className="text-sm font-semibold text-white/90">Hope Fellowship Worship Service</p>
+              <p className="text-sm font-semibold text-white/90">
+                {title && (state === "live" || state === "replay") ? title : "Hope Fellowship Worship Service"}
+              </p>
               <div className="flex items-center gap-3">
                 {state === "live" && <LiveStatusBadge status="live" />}
                 <ShareButton

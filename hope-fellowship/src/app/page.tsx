@@ -9,21 +9,31 @@ import { TransformationStory } from "@/components/home/transformation-story";
 import { ChurchLifeSection } from "@/components/home/church-life-section";
 import { FinalInvitation } from "@/components/home/final-invitation";
 import { Reveal } from "@/components/ui/reveal";
-import { SITE_MODE } from "@/config/site";
+import { getBroadcastData } from "@/lib/youtube";
 
 export const metadata: Metadata = {
   title: "Home",
 };
 
-export default function HomePage() {
+// Keeps the homepage's live indicators reasonably fresh without refetching
+// YouTube data on every single visitor request — the underlying YouTube
+// calls are already cached more precisely in src/lib/youtube.
+export const revalidate = 60;
+
+export default async function HomePage() {
+  // Fetched once here and passed down, so the homepage never issues more
+  // than one YouTube-derived data request per render, however many
+  // sections end up reflecting it.
+  const broadcast = await getBroadcastData();
+
   return (
     <>
-      <CinematicHero mode={SITE_MODE} />
+      <CinematicHero broadcast={broadcast} />
       <SundayInfoPanel />
       <Reveal>
         <WelcomeStory />
       </Reveal>
-      <WatchExperience />
+      <WatchExperience broadcast={broadcast} />
       <Reveal>
         <NextStepMosaic />
       </Reveal>

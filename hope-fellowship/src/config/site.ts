@@ -1,15 +1,3 @@
-import type { SiteMode } from "@/types";
-
-/**
- * SITE DISPLAY MODE
- * -----------------
- * Toggle this value to preview the homepage's "live" experience before
- * real YouTube livestream detection is implemented (planned for the
- * Watch Live phase). Change "normal" to "live" and save to see the
- * live-service layout.
- */
-export const SITE_MODE: SiteMode = "normal";
-
 /**
  * SITE-WIDE METADATA AND CONTACT DETAILS
  * ---------------------------------------------------

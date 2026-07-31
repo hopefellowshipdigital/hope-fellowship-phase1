@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HandHeart, MessageCircle, PlayCircle, Gift } from "lucide-react";
 import { mobileQuickActions } from "@/data/navigation";
-import { SITE_MODE } from "@/config/site";
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, typeof PlayCircle> = {
@@ -17,11 +16,11 @@ const iconMap: Record<string, typeof PlayCircle> = {
 /**
  * MobileStickyBar — persistent bottom action bar on small screens only.
  * Positioned with padding-aware page spacing (see layout.tsx) so it never
- * overlaps page content or the footer.
+ * overlaps page content or the footer. `isLive` is resolved server-side
+ * from real YouTube broadcast data (see layout.tsx) and passed down here.
  */
-export function MobileStickyBar() {
+export function MobileStickyBar({ isLive = false }: { isLive?: boolean }) {
   const pathname = usePathname();
-  const isLive = SITE_MODE === "live";
 
   return (
     <nav
